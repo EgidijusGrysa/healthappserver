@@ -1,6 +1,7 @@
 var express = require('express');
 var router  = express.Router();
 var User = require('../models/user');
+var bcrypt = require('bcryptjs');
 
 
 router.get('/healthapp/users', function (req, res, next) {
@@ -20,13 +21,18 @@ router.get('/healthapp/users', function (req, res, next) {
 });
 
 router.post('/healthapp/users', function(req,res,next){
-    console.log("==========INSIDE POST========");
     var name = req.body.name;
     var user = new User({
-        name: req.body.name
+        name: req.body.name,
+        password: bcrypt.hashSync(req.body.password,10),
+        email: req.body.email,
+        age: req.body.age,
+        weight: req.body.weight,
+        height: req.body.height,
+        favFoods: req.body.favFoods,
+        disFood: req.body.disFood
     });
-    console.log(req.body);
-    console.log(user);
+    
     user.save(function(err,result) {
         if(err){
             return res.status(500).json({
