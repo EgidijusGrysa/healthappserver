@@ -6,7 +6,7 @@ var logger = require('morgan');
 var bodyParser = require('body-parser');
 var cors = require('cors');
 
-var appRoutes = require('./routes/app');
+
 var userRoutes = require('./routes/user');
 var foodRoute = require('./routes/food');
 
@@ -35,7 +35,7 @@ app.use(function (req, res, next) {
 
 console.log("==================");
 
-app.use('/', appRoutes);
+
 app.use('/', userRoutes);
 
 // catch 404 and forward to error handler
