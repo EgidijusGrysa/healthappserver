@@ -22,7 +22,7 @@ router.get('/healthapp/users', function (req, res, next) {
 });
 
 router.post('/healthapp/users', function(req,res,next){
-    var name = req.body.name;
+    
     var user = new User({
         name: req.body.name,
         password: bcrypt.hashSync(req.body.password,10),
@@ -50,7 +50,7 @@ router.post('/healthapp/users', function(req,res,next){
     });
 });
 
-router.post('/signin', function(req,res,next){
+router.post('/healthapp/users/signin', function(req,res,next){
     User.findOne({email: req.body.email}, function(err,user){
         if(err){
             return res.status(500).json({
@@ -75,7 +75,8 @@ router.post('/signin', function(req,res,next){
        res.status(200).json({
            message: 'Successfully logged in!',
            token: token,
-           userId: user._id 
+           userId: user._id,
+           name: user.name
        });
     });
 });
