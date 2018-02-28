@@ -1,16 +1,15 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-//var mongooseVal = require('mongoose-unique-validator');
 
-console.log("========INSIDE USER==========");
-var schema = new Schema ({
+var foodSchema = new Schema ({
     
-    name: {type: String, required: true}
-    // password: {type: String, required: true},
-    // age: {type: Number, required: true},
-    // height: {type: Number,required: true},
-    // email: { type:String, required: true,unique: true}
+    id: {type: String, required: true},
+    name: {type: String, required: true},
+    quantity: {type: Number, required:false},
+    grams: {type: Number, required: false},
+    nutrients: {type: Array,required: true}
+    
 });
 
-//schema.plugin(mongooseVal);
-module.exports = mongoose.model('Food',schema);
+//Schema.plugin(mongooseVal);
+module.exports = mongoose.model('Food',foodSchema);

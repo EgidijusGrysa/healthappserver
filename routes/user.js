@@ -29,12 +29,10 @@ router.post('/healthapp/users', function(req,res,next){
         email: req.body.email,
         age: req.body.age,
         weight: req.body.weight,
-        height: req.body.height,
-        favFood: req.body.favFood,
-        disFood: req.body.disFood
+        height: req.body.height
     });
 
-    console.log(user);
+   // console.log(user);
     
     user.save(function(err,result) {
         if(err){

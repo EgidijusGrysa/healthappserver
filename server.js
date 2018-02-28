@@ -37,6 +37,7 @@ console.log("==================");
 
 
 app.use('/', userRoutes);
+app.use('/', foodRoute)
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

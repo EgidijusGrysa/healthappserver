@@ -11,8 +11,7 @@ var schema = new Schema ({
     height: {type: Number,required: true},
     weight: {type: Number,required: true},
     email: { type:String, required: true,unique: true},
-    favFood: { type: String, required: true},
-    disFood: { type: String, required: true}
+    mealPlan: [{type: Schema.Types.ObjectId, ref: 'MealPlan'}]
 });
 
 schema.plugin(mongooseVal);
