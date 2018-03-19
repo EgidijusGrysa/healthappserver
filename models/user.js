@@ -8,10 +8,10 @@ var schema = new Schema ({
     name: {type: String, required: true},
     password: {type: String, required: true},
     age: {type: Number, required: true},
-    height: {type: Number,required: true},
+    sex: {type: String,required: true},
     weight: {type: Number,required: true},
     email: { type:String, required: true,unique: true},
-    mealPlan: [{type: Schema.Types.ObjectId, ref: 'MealPlan'}]
+    callories: {type :String, required: true}
 });
 
 schema.plugin(mongooseVal);

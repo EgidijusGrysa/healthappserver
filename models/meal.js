@@ -12,7 +12,8 @@ var mealSchema = new Schema ({
     veg: Food,
     fruit: Food,
     carbs: Food,
-    protein: Food
+    protein: Food,
+    
 });
 
 //schema.plugin(mongooseVal);

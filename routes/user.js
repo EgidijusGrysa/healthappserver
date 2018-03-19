@@ -29,7 +29,8 @@ router.post('/healthapp/users', function(req,res,next){
         email: req.body.email,
         age: req.body.age,
         weight: req.body.weight,
-        height: req.body.height
+        sex: req.body.sex,
+        callories: req.body.callories
     });
 
    // console.log(user);
@@ -74,7 +75,8 @@ router.post('/healthapp/users/signin', function(req,res,next){
            message: 'Successfully logged in!',
            token: token,
            userId: user._id,
-           name: user.name
+           name: user.name,
+           callories: user.callories
        });
     });
 });

@@ -1,73 +1,106 @@
+
+
 var express = require('express');
 var router  = express.Router();
 var Meal = require('../models/meal');
 var Food = require('../models/food');
-
-// router.get('/healthapp/users', function(req,res){
-//     User.find(function(err,register){
-//         if(err){
-//             res.send(err);// sends error
-//         }
-//         res.json(register);
-//     });
-// });
+var DayMeal = require('../models/dayMeals');
+var UserMeal = require('../models/userMeal');
 
 router.post('/healthapp/meals', function(req,res,next){
-    console.log(req);
+    console.log(req.body.dayMeal.eveMeal);
+        var userMeal = new UserMeal({
+            _id: req.body.userID,
+            dayMeals: {
+                day: req.body.dayMeal.date,
+                breakfast: req.body.dayMeal.breakfast,
+                lunch: req.body.dayMeal.lunch,
+                dinner: req.body.dayMeal.dinner,
+                eveMeal: req.body.dayMeal.eveMeal
+            }
+        });
     
-        var meal = new Meal({
-            name: req.body.name,
-            callories: req.body.callories,
-                drink: new Food({
-                id: req.body.drink.id,
-                name: req.body.drink.name,
-                quantity: req.body.drink.quantity,
-                grams: req.body.drink.grams,
-                nutrients: req.body.drink.nutrients
-            }),
-            veg: new Food({
-                id: req.body.veg.id,
-                name: req.body.veg.name,
-                quantity: req.body.veg.quantity,
-                grams: req.body.veg.grams,
-                nutrients: req.body.veg.nutrients
-            }),
-            fruit: new Food({
-                id: req.body.fruit.id,
-                name: req.body.fruit.name,
-                quantity: req.body.fruit.quantity,
-                grams: req.body.fruit.grams,
-                nutrients: req.body.fruit.nutrients
-            }),
-            carbs: new Food({
-                id: req.body.carbs.id,
-                name: req.body.carbs.name,
-                quantity: req.body.carbs.quantity,
-                grams: req.body.carbs.grams,
-                nutrients: req.body.carbs.nutrients
-            }),
-            protein: new Food({
-                id: req.body.protein.id,
-                name: req.body.protein.name,
-                quantity: req.body.protein.quantity,
-                grams: req.body.protein.grams,
-                nutrients: req.body.protein.nutrients
-            })
-        })
-        meal.save(function(err,result) {
+    userMeal.save(function(err,result) {
+        if(err){
+            return res.status(500).json({
+                title: 'An Error has occured',
+                error: err
+            });
+        }
+        res.status(201).json({
+            message: 'Saved',
+            obj: result
+        });
+    });
+});
+
+router.get('/healthapp/usermeals/:userID',function(req,res,next){
+    UserMeal.findById(req.params.userID, function(err,user){
+        console.log(req.params.userID);
+        if(err){
+            return res.status(500).json({
+                title: 'Error has occured',
+                error: err
+            });
+        }
+
+        if(!res){
+            return res.status(500).json({
+                title:'No set of meals found for this user',
+                error:err
+            });
+        }else {
+            res.status(200).json({
+                obj: user
+            });
+        }
+        console.log(user);
+       
+    });
+});
+
+router.patch('/healthapp/usermeals/:id', function(req,res,next){
+    UserMeal.findById(req.params.id, function(err,res) {
+        if(err){
+            return res.status(500).json({
+                title: 'An Error has occured',
+                error: err
+            });
+        }
+        if(!res){
+            return res.status(500).json({
+                title:'No Meal found for that user',
+                error: {
+                    message: 'Meal not found'
+                }
+            });
+        }
+        res.dayMeals = {
+            day: req.body.dayMeal.date,
+            breakfast: req.body.dayMeal.breakfast,
+            lunch: req.body.dayMeal.lunch,
+            dinner: req.body.dayMeal.dinner,
+            eveMeal: req.body.dayMeal.eveMeal
+        };
+        res.save(function(err,result){
             if(err){
                 return res.status(500).json({
                     title: 'An Error has occured',
                     error: err
                 });
             }
-            res.status(201).json({
-                message: 'Saved',
+            res.status(200).json({
+                message: 'Updated message',
                 obj: result
             });
         });
-    
     });
+});
+
+        
+        
+    
+    
    
 
 module.exports = router;
