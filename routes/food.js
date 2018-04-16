@@ -7,21 +7,21 @@ var Food = require('../models/food');
 var DayMeal = require('../models/dayMeals');
 var UserMeal = require('../models/userMeal');
 
-router.get('/healthapp/usermeals', function (req, res, next) {
-    UserMeal.find()
-        .exec(function (err, messages) {
-            if (err) {
-                return res.status(500).json({
-                    title: 'An error occurred',
-                    error: err
-                });
-            }
-            res.status(200).json({
-                message: 'Success',
-                obj: messages
-            });
-        });
-});
+// router.get('/healthapp/usermeals', function (req, res, next) {
+//     UserMeal.find()
+//         .exec(function (err, messages) {
+//             if (err) {
+//                 return res.status(500).json({
+//                     title: 'An error occurred',
+//                     error: err
+//                 });
+//             }
+//             res.status(200).json({
+//                 message: 'Success',
+//                 obj: messages
+//             });
+//         });
+// });
 
 router.post('/healthapp/meals', function(req,res,next){
     console.log(req.body.dayMeal.eveMeal);
