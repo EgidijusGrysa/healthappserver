@@ -83,7 +83,7 @@ router.put('/healthapp/usermeals/:id', function(req,res,next){
                 error: err
             });
         }
-        if(!res){
+        if(!item){
             return res.status(500).json({
                 title:'No Meal found for that user',
                 error: {
@@ -91,7 +91,7 @@ router.put('/healthapp/usermeals/:id', function(req,res,next){
                 }
             });
         }
-        res.dayMeals = {
+        item.dayMeals = {
             day: req.body.dayMeal.date,
             breakfast: req.body.dayMeal.breakfast,
             lunch: req.body.dayMeal.lunch,
