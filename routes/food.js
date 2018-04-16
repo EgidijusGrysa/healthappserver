@@ -89,7 +89,7 @@ router.put('/healthapp/usermeals/:id', function(req,res,next){
                     error: err
                 });
             }
-            res.status(200).json({
+            result.status(200).json({
                 message: 'Updated message',
                 obj: result
             });
