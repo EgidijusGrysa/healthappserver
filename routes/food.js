@@ -59,7 +59,7 @@ router.get('/healthapp/usermeals/:userID',function(req,res,next){
     });
 });
 
-router.patch('/healthapp/usermeals/:id', function(req,res,next){
+router.put('/healthapp/usermeals/:id', function(req,res,next){
     UserMeal.findById(req.params.id, function(err,res) {
         if(err){
             return res.status(500).json({
