@@ -60,7 +60,7 @@ router.get('/healthapp/usermeals/:userID',function(req,res,next){
 });
 
 router.put('/healthapp/usermeals/:id', function(req,res,next){
-    UserMeal.findById(req.params.id, function(err,res) {
+    UserMeal.findById(req.params.id, function(err,item) {
         if(err){
             return res.status(500).json({
                 title: 'An Error has occured',
@@ -82,14 +82,14 @@ router.put('/healthapp/usermeals/:id', function(req,res,next){
             dinner: req.body.dayMeal.dinner,
             eveMeal: req.body.dayMeal.eveMeal
         };
-        res.save(function(err,result){
+        item.save(function(err,result){
             if(err){
                 return res.status(500).json({
                     title: 'An Error has occured',
                     error: err
                 });
             }
-            result.status(200).json({
+            res.status(200).json({
                 message: 'Updated message',
                 obj: result
             });
