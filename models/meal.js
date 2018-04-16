@@ -7,6 +7,7 @@ console.log("========INSIDE USER==========");
 var mealSchema = new Schema ({
     
     name: {type: String, required: true},
+    consumed: {type:Boolean,required:true},
     callories: {type: Number, required: true},
     drink: Food,
     veg: Food,
